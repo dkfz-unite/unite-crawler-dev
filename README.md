@@ -19,17 +19,16 @@ Crawler requires standard directories structure to work:
   ├─genome #data feed
     ├─donor #donor id
       ├─sample #sample id
-        ├─rnasc
-          ├─mtx
+        ├─rnasc #sample type
+          ├-exp #expression data
             ├─matrix.mtx.gz
             ├─barcodes.tsv.gz
             ├─features.tsv.gz
             ├─meta.tsv
-        ├─meth
-          ├─idat
-            ├─*Red.idat
-            ├─*Grn.idat
-            ├─meta.tsv
+        ├─meth #sample type
+          ├─*Red.idat
+          ├─*Grn.idat
+          ├─meta.tsv
 ```
 
 To make it explore the data of required type, specify the type and absolute path to the root directory:
@@ -39,7 +38,7 @@ To make it explore the data of required type, specify the type and absolute path
 
 ### Supported types
 - `meth` - Methylation array data in `idat` format.
-- `rnasc-exp` - scRNASeq count matrix in `mtx` format.
+- `rnasc-exp` - scRNASeq expression data in `mtx` format.
 
 ## Readers
 There is only one standard reader is available for any kind of data - `meta` reader.  
