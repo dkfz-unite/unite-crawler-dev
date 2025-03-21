@@ -47,5 +47,5 @@ Metadata in the file should be in the format required by corresponding data feed
 
 To read metadata of the file specify absolute path to the file:
 ```sh
-./meta /path/to/meta.tsv
+./meta /path/to/root/genome/donor1/sample1/rnasc/exp/matrix.mtx.gz
 ```
