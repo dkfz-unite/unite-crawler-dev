@@ -1,0 +1,6 @@
+*.DS_Store
+*.DB_Store
+.vscode/
+publish/
+bin/
+obj/
