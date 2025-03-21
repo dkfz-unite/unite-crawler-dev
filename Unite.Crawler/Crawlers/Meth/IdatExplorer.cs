@@ -5,8 +5,8 @@ namespace Unite.Crawler.Crawlers.Meth;
 public class IdatExplorer
 {
     // Explorer should receive a path to the root directory
-    // ../root/genome/donor/sample/meth/idat/*Grn.idat
-    // ../root/genome/donor/sample/meth/idat/*Red.idat
+    // ../root/genome/donor/sample/meth/*Grn.idat
+    // ../root/genome/donor/sample/meth/*Red.idat
     public static IEnumerable<FileMetadata> Explore(string path)
     {
         if (!Directory.Exists(path))
@@ -21,7 +21,7 @@ public class IdatExplorer
         {
             foreach (var sampleDirectory in donorDirectory.EnumerateDirectories())
             {
-                var dataDirectoryPath = Path.Combine(sampleDirectory.FullName, "meth", "idat");
+                var dataDirectoryPath = Path.Combine(sampleDirectory.FullName, "meth");
                 if (!Directory.Exists(dataDirectoryPath))
                     continue;
 

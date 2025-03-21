@@ -5,9 +5,9 @@ namespace Unite.Crawler.Crawlers.Rnasc;
 public class MtxExplorer
 {
     // Explorer should receive a path to the root directory
-    // ../root/genome/donor/sample/rnasc/mtx/matrix.mtx.gz
-    // ../root/genome/donor/sample/rnasc/mtx/barcodes.tsv.gz
-    // ../root/genome/donor/sample/rnasc/mtx/features.tsv.gz
+    // ../root/genome/donor/sample/rnasc/exp/matrix.mtx.gz
+    // ../root/genome/donor/sample/rnasc/exp/barcodes.tsv.gz
+    // ../root/genome/donor/sample/rnasc/exp/features.tsv.gz
     public static IEnumerable<FileMetadata> Explore(string path)
     {
         if (!Directory.Exists(path))
@@ -22,7 +22,7 @@ public class MtxExplorer
         {
             foreach (var sampleDirectory in donorDirectory.EnumerateDirectories())
             {
-                var dataDirectoryPath = Path.Combine(sampleDirectory.FullName, "rnasc", "mtx");
+                var dataDirectoryPath = Path.Combine(sampleDirectory.FullName, "rnasc", "exp");
                 if (!Directory.Exists(dataDirectoryPath))
                     continue;
 
