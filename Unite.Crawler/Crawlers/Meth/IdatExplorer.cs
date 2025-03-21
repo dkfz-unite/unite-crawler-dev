@@ -5,48 +5,47 @@ namespace Unite.Crawler.Crawlers.Meth;
 public class IdatExplorer
 {
     // Explorer should receive a path to the root directory
-    // ../root/genome/meth/donor/sample/idat/*Grn.idat
-    // ../root/genome/meth/donor/sample/idat/*Red.idat
+    // ../root/genome/donor/sample/meth/idat/*Grn.idat
+    // ../root/genome/donor/sample/meth/idat/*Red.idat
     public static IEnumerable<FileMetadata> Explore(string path)
     {
         if (!Directory.Exists(path))
             throw new DirectoryNotFoundException($"Directory '{path}' not found.");
 
-        var analysisDirectoryPath = Path.Combine(path, "genome", "meth");
-        if (!Directory.Exists(analysisDirectoryPath))
+        var genomeDirectoryPath = Path.Combine(path, "genome");
+        if (!Directory.Exists(genomeDirectoryPath))
             yield break;
 
-        var analysisDirectory = new DirectoryInfo(analysisDirectoryPath);
-
-        foreach (var donorDirectory in analysisDirectory.EnumerateDirectories())
+        var genomeDirectory = new DirectoryInfo(genomeDirectoryPath);
+        foreach (var donorDirectory in genomeDirectory.EnumerateDirectories())
         {
             foreach (var sampleDirectory in donorDirectory.EnumerateDirectories())
             {
-                foreach (var formatDirectory in sampleDirectory.EnumerateDirectories())
+                var dataDirectoryPath = Path.Combine(sampleDirectory.FullName, "meth", "idat");
+                if (!Directory.Exists(dataDirectoryPath))
+                    continue;
+
+                var dataDirectory = new DirectoryInfo(dataDirectoryPath);
+                var redIdatFile = dataDirectory.EnumerateFiles("*Red.idat").FirstOrDefault();
+                var grnIdatFile = dataDirectory.EnumerateFiles("*Grn.idat").FirstOrDefault();
+
+                if (redIdatFile != null && grnIdatFile != null)
                 {
-                    var redIdatFile = formatDirectory.EnumerateFiles("*Red.idat").FirstOrDefault();
-                    var grnIdatFile = formatDirectory.EnumerateFiles("*Grn.idat").FirstOrDefault();
-
-                    if (redIdatFile != null && grnIdatFile != null)
+                    yield return new FileMetadata
                     {
-                        yield return new FileMetadata
-                        {
-                            Name = redIdatFile.Name,
-                            Reader = "cmd/meta",
-                            Format = "idat",
-                            Archive = "none",
-                            Path = redIdatFile.FullName
-                        };
+                        Name = redIdatFile.Name,
+                        Reader = "cmd/meta",
+                        Format = "idat",
+                        Path = redIdatFile.FullName
+                    };
 
-                        yield return new FileMetadata
-                        {
-                            Name = grnIdatFile.Name,
-                            Reader = "cmd/meta",
-                            Format = "idat",
-                            Archive = "none",
-                            Path = grnIdatFile.FullName
-                        };
-                    }
+                    yield return new FileMetadata
+                    {
+                        Name = grnIdatFile.Name,
+                        Reader = "cmd/meta",
+                        Format = "idat",
+                        Path = grnIdatFile.FullName
+                    };
                 }
             }
         }
