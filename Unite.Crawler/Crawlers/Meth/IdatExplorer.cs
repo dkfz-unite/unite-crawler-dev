@@ -33,7 +33,7 @@ public class IdatExplorer
                 {
                     yield return new FileMetadata
                     {
-                        Name = redIdatFile.Name,
+                        Name = redIdatFile.Name.Replace(".idat", ""),
                         Reader = "cmd/meta",
                         Format = "idat",
                         Path = redIdatFile.FullName
@@ -41,7 +41,7 @@ public class IdatExplorer
 
                     yield return new FileMetadata
                     {
-                        Name = grnIdatFile.Name,
+                        Name = grnIdatFile.Name.Replace(".idat", ""),
                         Reader = "cmd/meta",
                         Format = "idat",
                         Path = grnIdatFile.FullName

@@ -35,7 +35,7 @@ public class MtxExplorer
                 {
                     yield return new FileMetadata
                     {
-                        Name = matrixFile.Name,
+                        Name = matrixFile.Name.Replace(".mtx.gz", ""),
                         Reader = "cmd/meta",
                         Format = "mtx",
                         Archive = "gz",
@@ -44,7 +44,7 @@ public class MtxExplorer
 
                     yield return new FileMetadata
                     {
-                        Name = barcodesFile.Name,
+                        Name = barcodesFile.Name.Replace(".tsv.gz", ""),
                         Reader = "cmd/meta",
                         Format = "tsv",
                         Archive = "gz",
@@ -53,7 +53,7 @@ public class MtxExplorer
 
                     yield return new FileMetadata
                     {
-                        Name = featuresFile.Name,
+                        Name = featuresFile.Name.Replace(".tsv.gz", ""),
                         Reader = "cmd/meta",
                         Format = "tsv",
                         Archive = "gz",
