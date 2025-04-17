@@ -1,4 +1,4 @@
-﻿// "dna", "dna-ssm", "dna-cnv", "dna-sv", "meth", "meth-lvl", "rna", "rna-exp", "rnasc", "rnasc-exp",
+﻿// "dna", "dna-sm", "dna-cnv", "dna-sv", "meth", "meth-lvl", "rna", "rna-exp", "rnasc", "rnasc-exp",
 using Unite.Essentials.Tsv;
 
 var types = new string[] { "meth", "rnasc-exp" };
